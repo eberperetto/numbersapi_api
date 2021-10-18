@@ -36,6 +36,8 @@ python manage.py runserver 0:8000
 
 You can access an website example inside the project at [http://localhost:8000](http://localhost:8000) and may take a look at its HTML file content on `api/templates/index.html`.
 
+> ⚠️ **Warning**: This project is intended and configured for local development only. If you plan to use it in production, make sure that the Django `settings.py` file is properly patched for it.
+
 There is only one route on this API, accessible via GET at [http://localhost:8000/api/get_fact](http://localhost:8000/api/get_fact), in which the following variety of parameters can be informed:
 
 - **number**: the number whose fact will be retrieved, can be either an integer number or the word "random". Use the **day** and **month** parameters instead when requesting the "date" fact type. Default: "random"
