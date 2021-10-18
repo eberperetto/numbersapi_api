@@ -6,13 +6,35 @@ This Django API client was created to give number trivia serving coming from [Nu
 
 ### Using Docker
 
-TODO
+Make sure that the Docker environment is properly installed and launched in your OS. Be certain to install a version that contains the `docker-compose` CLI as well.
+
+To run and start your API server, run the following command in your project root folder. You can lose the `--build` flag after the first run:
+
+```shell
+docker-compose up --build
+```
 
 ### Without Docker
 
-TODO
+Make sure that `python3 >= 3.8` is installed in your OS. It's recommended to setup a virtual environment for this project, so create a new directory and start it there by using `venv`.
+
+```shell
+python3 -m venv .
+source bin/activate
+```
+
+Clone this repository inside the created directory, install the required `pip` packages and start your python server.
+
+```shell
+cd numbersapi_api
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver 0:8000
+```
 
 ## Usage
+
+You can access an website example inside the project at [http://localhost:8000](http://localhost:8000) and may take a look at its HTML file content on `api/templates/index.html`.
 
 There is only one route on this API, accessible via GET at [http://localhost:8000/api/get_fact](http://localhost:8000/api/get_fact), in which the following variety of parameters can be informed:
 
