@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NumbersAPI API Index</title>
+  </head>
+  <body>
+    <h1>NumbersAPI API Index</h1>
+    <p>
+        This API client was created to give number trivia
+         serving coming from <a href="http://www.numbersapi.com/">NumbersAPI</a>
+         a new spin.
+    </p>
+    <h2>Usage</h2>
+    <p>
+        There is only one route on this API, accessible via GET at
+         <a href="{{ domain }}/api/get_fact">{{ domain }}api/get_fact</a>, 
+         in which the following variety of parameters can be informed:
+    </p>
+    <ul>
+        <li>
+            <b><i>number</i></b>: the number whose fact will be retrieved, can be
+             either an integer number or the word "random". Use the <b>day</b> and 
+             <b>month</b> parameters instead when requesting the "date" fact type.
+             <i>Default: "random"</i>
+        </li>
+        <li>
+            <b><i>fact_type</i></b>: the type of the fact, should be one of the 
+            following: "trivia", "math", "year" and "date". 
+            <i>Default: "trivia"</i>
+        </li>
+        <li>
+            <b><i>month</i></b>: when the fact type is a "date", this needs to be
+            informed, with a valid month from 1-12.
+        </li>
+        <li>
+            <b><i>day</i></b>: when the fact type is a "date", this needs to be
+            informed, with a valid day from 1-31.
+        </li>
+        <li>
+            <b><i>fragment</i></b>: sets the fact text to return as a fragment
+            to be used inside a sentence, no value needed.
+        </li>
+        <li>
+            <b><i>default</i></b>: text to be retrieved when the queried number
+            is not found. <i>Default: `n` is a boring number.</i>
+        </li>
+        <li>
+            <b><i>notfound</i></b>: informs what should be done when the number
+            is not found, should be one of the following: "default", "floor" (rounds
+             the number to the next lowest found) and "ceil" (rounds the number 
+             to the next highest found). <i>Default: the <b>default</b> parameter value</i>
+        </li>
+        <li>
+            <b><i>min</i></b>: sets a lower integer threshold to the "random" <b>number</b>,
+            should be used along with the <b>max</b> parameter.
+        </li>
+        <li>
+            <b><i>max</i></b>: sets a higher integer threshold to the "random" <b>number</b>,
+            should be used along with the <b>min</b> parameter.
+        </li>
+    </ul>
+    <h3>Response</h3>
+    <p>
+        This route's response will be a JSON object containing the
+         following fields:
+    </p>
+    <ul>
+        <li>
+            <b><i>text</i></b> (omitted when there is an error)
+        </li>
+        <li>
+            <b><i>type</i></b> (omitted when there is an error)
+        </li>
+        <li>
+            <b><i>number</i></b> (omitted when there is an error)
+        </li>
+        <li>
+            <b><i>error</i></b> (empty when the request was successful)
+        </li>
+    </ul>
+    <h2>Examples</h2>
+    <p><b>{{ domain }}/api/get_fact</b></p>
+    <p>Random fact: <span id="random"></span></p>
+    <p><i><span id="randomResponseObj"></span></i></p>
+
+    <p><b>{{ domain }}/api/get_fact?number=27&fact_type=math&fragment</b></p>
+    <p>Math fact: number 27 is <span id="number27"></span>, did you know?</p>
+    <p><i><span id="number27ResponseObj"></span></i></p>
+
+    <p><b>{{ domain }}/api/get_fact?month=7&day=7&fact_type=date</b></p>
+    <p>07/07 date fact: <span id="date77"></span></p>
+    <p><i><span id="date77ResponseObj"></span></i></p>
+  </body>
+  <script>
+    async function getRandom() {
+        let response = await fetch("{{ domain }}/api/get_fact");
+        let data = await response.json();
+        document.getElementById("random").textContent = data.text;
+        document.getElementById("randomResponseObj").textContent = JSON.stringify(data);
+    };
+    async function getNumber27() {
+        let response = await fetch("{{ domain }}/api/get_fact?number=27&fact_type=math&fragment");
+        let data = await response.json();
+        document.getElementById("number27").textContent = data.text;
+        document.getElementById("number27ResponseObj").textContent = JSON.stringify(data);
+    };
+    async function getDate77() {
+        let response = await fetch("{{ domain }}/api/get_fact?month=7&day=7&fact_type=date");
+        let data = await response.json();
+        document.getElementById("date77").textContent = data.text;
+        document.getElementById("date77ResponseObj").textContent = JSON.stringify(data);
+    };
+    getRandom();
+    getNumber27();
+    getDate77();
+  </script>
+</html>

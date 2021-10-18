@@ -2,13 +2,13 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
-
 SECRET_KEY = "hnbe@j8)-1fowg4=&k%e^6171^ek+h45*5n8wfu%5rk@glei-g"
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+DOMAIN = "http://localhost:8000"
 
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "api",
 ]
 
 MIDDLEWARE = [
